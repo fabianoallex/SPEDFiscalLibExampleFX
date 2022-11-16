@@ -1,6 +1,8 @@
 package com.example.spedfiscallibexamplefx;
 
 import SPEDFiscalLib.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,11 +14,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
+import javafx.util.Duration;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 interface TextFieldTimerListener {
     void onChange(String oldValue, String newValue) throws ParseException;
@@ -24,7 +24,7 @@ interface TextFieldTimerListener {
 
 class TextFieldTimer extends TextField {
     static public long DEFAULT_DELAY = 1000L;
-    private Timer timer = null;
+    private Timeline timeline = null;
     private TextFieldTimerListener listener;
     private String oldText = "";
     TextFieldTimer(long delay) {
@@ -32,19 +32,22 @@ class TextFieldTimer extends TextField {
             if (listener == null)
                 return;
 
-            if (timer != null) timer.cancel();
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        listener.onChange(oldText, newValue);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    oldText = newValue;
-                }
-            }, delay);
+            if (timeline != null)
+                timeline.stop();
+
+            timeline = new Timeline(
+                    new KeyFrame(Duration.millis(DEFAULT_DELAY), event -> {
+                        try {
+                            listener.onChange(oldText, newValue);
+                        } catch (ParseException exception) {
+                            throw new RuntimeException(exception);
+                        }
+                        oldText = newValue;
+                    })
+            );
+
+            timeline.setCycleCount(1);
+            timeline.play();
         });
     }
 
@@ -81,7 +84,7 @@ class FieldControls {
 
         textField.appendText(field.getValueAsString());
 
-        textField.setListener((oldValue, newValue)  -> {
+        textField.setListener((oldValue, newValue) -> {
             listView.getItems().clear();
 
             field.setValueFromString(newValue);
