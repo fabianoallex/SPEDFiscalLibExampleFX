@@ -10,11 +10,11 @@
             <regex name="number" expression="[0-9]" fail_message="não é um número"/>
             <regex name="cpf_rgx" expression="[0-9]{11}" fail_message="CPF inválido"/>
             <regex name="cnpj_rgx" expression="[0-9]{14}" fail_message="CNPJ inválido"/>
-            <regex name="codigo_municipio" expression="[0-9]{7}" fail_message="Código do munípio deve ter 7 Dígitos"/>
+            <regex name="codigo_municipio" expression="[0-9]{7}" fail_message="Código do município deve ter 7 Dígitos"/>
             <regex name="cnpjcpf" expression="[0-9]{14}|[0-9]{11}" fail_message="CNPJ ou CPF inválido"/>
             <regex name="ie" expression="[0-9]{0,14}|ISENTO|PR[0-9]{4,8}" fail_message="Inscrição Estadual inválida"/>
             <regex name="uf" expression="AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO"
-                   fail_message="UF inválida"/>
+                   fail_message="UF inválida 123456"/>
             <regex name="perfil_apresentacao" expression="A|B|C" fail_message="Perfil de Apresentação inválido"/>
             <regex name="tipo_atividade" expression="0|1" fail_message="Tipo de Atividade inválido"/>
             <regex name="finalidade_arquivo" expression="0|1" fail_message="Tipo de Atividade inválido"/>

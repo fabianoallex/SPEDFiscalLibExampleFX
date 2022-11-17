@@ -14,35 +14,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
-class ValidationEventListViewItem {
-    private final ValidationEvent validationEvent;
-
-    public ValidationEventListViewItem(ValidationEvent validationEvent) {
-        this.validationEvent = validationEvent;
-    }
-
-    @Override
-    public String toString() {
-        return this.validationEvent.getMessage();
-    }
-
-    public Register getRegister() {
-        return this.validationEvent.getRegister();
-    }
-
-    public ValidationEvent getValidationEvent() {
-        return validationEvent;
-    }
-}
-
-record SPEDRow(String row, Register register) {
-
-    @Override
-    public String toString() {
-        return this.register.toString();
-    }
-}
-
 public class ExampleController {
     @FXML
     private ListView<ValidationEventListViewItem> listViewValidations;
@@ -61,7 +32,7 @@ public class ExampleController {
         Register register = item.register();
         if (register == null) return;
 
-        ShowRegisterScene(register);
+        ShowRegisterView(register);
     }
 
     @FXML
@@ -75,10 +46,10 @@ public class ExampleController {
         Register register = item.getRegister();
         if (register == null) return;
 
-        ShowRegisterScene(register);
+        ShowRegisterView(register);
     }
 
-    private void ShowRegisterScene(Register register) throws IOException {
+    private void ShowRegisterView(Register register) throws IOException {
         RegisterViewController controller = new RegisterViewController(register);
 
         FXMLLoader fxmlLoader = new FXMLLoader(ExampleApplication.class.getResource("register-view.fxml"));
@@ -198,13 +169,11 @@ public class ExampleController {
                 listViewContents.getItems().clear();
                 spedGenerator.write((string, register) -> {
                     listViewContents.getItems().add(new SPEDRow(string, register));
-                    System.out.println(register);
                 });
             }
 
             listViewValidations.getItems().clear();
 
-            //validação dos dados (trabalho em andamento)
             spedGenerator.validate(new ValidationListener() {
                 @Override
                 public void onSuccessMessage(ValidationEvent event) {
@@ -227,3 +196,20 @@ public class ExampleController {
     }
 }
 
+record ValidationEventListViewItem(ValidationEvent validationEvent) {
+    @Override
+    public String toString() {
+        return this.validationEvent.getMessage();
+    }
+
+    public Register getRegister() {
+        return this.validationEvent.getRegister();
+    }
+}
+
+record SPEDRow(String row, Register register) {
+    @Override
+    public String toString() {
+        return this.register.toString();
+    }
+}

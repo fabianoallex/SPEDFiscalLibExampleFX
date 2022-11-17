@@ -105,7 +105,6 @@ class FieldControls {
                 @Override
                 public void onErrorMessage(ValidationEvent validationEvent) {
                     listView.getItems().add(new ValidationEventListViewItem(validationEvent));
-                    //System.out.println(validationEvent.getMessage());
                 }
             });
 
@@ -170,7 +169,7 @@ public class RegisterViewController {
                 Register register = item.getRegister();
                 if (register == null) return;
 
-                Field<?> field = (item.getValidationEvent() instanceof FieldValidationEvent fieldValidationEvent) ?
+                Field<?> field = (item.validationEvent() instanceof FieldValidationEvent fieldValidationEvent) ?
                         fieldValidationEvent.getField() : null;
 
                 System.out.println(field);
