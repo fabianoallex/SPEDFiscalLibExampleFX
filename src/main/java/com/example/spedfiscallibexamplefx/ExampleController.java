@@ -74,7 +74,7 @@ public class ExampleController {
                     ).toURI().toString(),
                     new MyValidation()
             );
-            SPEDFactory factory = new SPEDFactory(definitions);
+            Factory factory = new Factory(definitions);
             SPEDGenerator spedGenerator = factory.createSPEDGenerator();
 
             Register r = spedGenerator.getRegister0000().getRegister();  //0000
@@ -150,7 +150,7 @@ public class ExampleController {
 
             //Exemplo com StringBuilder
             if (writerOptions == 0) {
-                SPEDStringBuilder writer = new SPEDStringBuilder(new StringBuilder());
+                StringBuilderWriter writer = new StringBuilderWriter(new StringBuilder());
                 spedGenerator.write(writer);
                 listViewContents.getItems().clear();
                 //listViewContents.getItems().add(writer.stringBuilder().toString());
@@ -160,7 +160,7 @@ public class ExampleController {
             if (writerOptions == 1) {
                 //exemplo com FileWriter:
                 FileWriter fileWriter = new FileWriter("c:/caminho/do/arquivo/teste2.txt");
-                SPEDFileWriter writer = new SPEDFileWriter(fileWriter);
+                FileWriterWriter writer = new FileWriterWriter(fileWriter);
                 fileWriter.close();
             }
 
