@@ -94,9 +94,21 @@ public class ExampleController {
 
             Block b0 = spedGenerator.addBlock("0");
 
+
+
             r = b0.addRegister("0002");
             r.setFieldValue("CLAS_ESTAB_IND", "05");
 
+
+            //usando classe especializada de NamedRegister
+            Register0005 register0005 = (Register0005) b0.addNamedRegister(Register0005.class);
+            register0005.setFantasia("FANTASIA");
+            register0005.setCep("78123456");
+            register0005.setNumero("1500");
+            register0005.setComplemento("Rua das rosas");
+            register0005.setBairro("Centro");
+
+            /*
             r = b0.addRegister("0005");
             r.setFieldValue("FANTASIA", "   TESTE FANTASIA");
             r.setFieldValue("CEP", "teste cep");
@@ -104,6 +116,8 @@ public class ExampleController {
             r.setFieldValue("NUM", "  teste NUM");
             r.setFieldValue("COMPL", "teste COMPL");
             r.setFieldValue("BAIRRO", "  teste BAIRRO");
+
+             */
 
             Register r0190 = b0.addRegister("0190");
             r0190.setFieldValue("UNID", "M");
