@@ -74,7 +74,9 @@ public class ExampleController {
                     ).toURI().toString(),
                     new MyValidation()
             );
+
             Factory factory = new Factory(definitions);
+
             SPEDGenerator spedGenerator = factory.createSPEDGenerator();
 
             Register r = spedGenerator.getRegister0000().getRegister();  //0000
@@ -100,14 +102,6 @@ public class ExampleController {
             r.setFieldValue("CLAS_ESTAB_IND", "05");
 
 
-            //usando classe especializada de NamedRegister
-            Register0005 register0005 = (Register0005) b0.addNamedRegister(Register0005.class);
-            register0005.setFantasia("FANTASIA");
-            register0005.setCep("78123456");
-            register0005.setNumero("1500");
-            register0005.setComplemento("Rua das rosas");
-            register0005.setBairro("Centro");
-
             /*
             r = b0.addRegister("0005");
             r.setFieldValue("FANTASIA", "   TESTE FANTASIA");
@@ -118,6 +112,14 @@ public class ExampleController {
             r.setFieldValue("BAIRRO", "  teste BAIRRO");
 
              */
+
+            //usando classe especializada de NamedRegister
+            Register0005 register0005 = (Register0005) b0.addNamedRegister(Register0005.class);
+            register0005.setFantasia("FANTASIA");
+            register0005.setCep("78123456");
+            register0005.setNumero("1500");
+            register0005.setComplemento("Rua das rosas");
+            register0005.setBairro("Centro");
 
             Register r0190 = b0.addRegister("0190");
             r0190.setFieldValue("UNID", "M");
