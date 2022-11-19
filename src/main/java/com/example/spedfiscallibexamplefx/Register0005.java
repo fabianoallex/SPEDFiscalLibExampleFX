@@ -34,4 +34,24 @@ public class Register0005 extends NamedRegister {
     public void setBairro(String bairro) {
         this.getStringField(FIELD_NAME_BAIRRO).setValue(bairro);
     }
+
+    public String getFantasia() {
+        return this.getStringField(FIELD_NAME_FANTASIA).getValue();
+    }
+
+    public String getCep() {
+        return this.getStringField(FIELD_NAME_CEP).getValue();
+    }
+
+    public String getNumero() {
+        return this.getStringField(FIELD_NAME_NUMERO).getValue();
+    }
+
+    public String getComplemento() {
+        return this.getStringField(FIELD_NAME_COMPLEMENTO).getValue();
+    }
+
+    public String getBairro() {
+        return this.getStringField(FIELD_NAME_BAIRRO).getValue();
+    }
 }
