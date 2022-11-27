@@ -94,7 +94,7 @@ public class ExampleController {
             r.setFieldValue("IE", "ISENTO");
             r.setFieldValue("IND_ATIV", 0);
 
-            Block b0 = spedGenerator.addBlock("0");
+            Block b0 = spedGenerator.addBlock("0","0001", "0990");
 
 
 
@@ -115,7 +115,7 @@ public class ExampleController {
 
             //usando classe especializada de NamedRegister
             Register0005 register0005 = (Register0005) b0.addNamedRegister(Register0005.class);
-            register0005.setFantasia("FANTASIA");
+            register0005.setFantasia("Nome de Fantasia");
             register0005.setCep("78123456");
             register0005.setNumero("1500");
             register0005.setComplemento("Rua das rosas");
@@ -145,7 +145,7 @@ public class ExampleController {
             r.setFieldValue("DESCR_ANT_ITEM", "ABACATE ANTIGO");
 
 
-            Block bc = spedGenerator.addBlock("C");
+            Block bc = spedGenerator.addBlock("C", "C001", "C990");
             r = bc.addRegister("C100");
 
             for (int i = 0; i < 4; i++) {
@@ -155,10 +155,11 @@ public class ExampleController {
                 c591.setFieldValue("VL_FCP_ST", 2333.09 + 2*i);
             }
 
-            Block bd = spedGenerator.addBlock("D");
-            Block be = spedGenerator.addBlock("E");
+            Block bd = spedGenerator.addBlock("D", "D001", "D990");
+            Block be = spedGenerator.addBlock("E", "E001", "E990");
 
             //totalizacao: gerar os registros de contagem (bloco 9)
+            spedGenerator.generateBlock9();
             spedGenerator.totalize();
 
             //altere aqui para 0, 1 ou 2 para testar as diferentes formas de obter a saida dos dados
