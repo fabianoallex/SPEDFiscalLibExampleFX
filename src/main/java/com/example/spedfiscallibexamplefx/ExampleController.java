@@ -1,6 +1,5 @@
 package com.example.spedfiscallibexamplefx;
 
-import SPEDFiscalLib.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import sped.lib.*;
 
 import java.io.FileWriter;
 import java.io.IOException;

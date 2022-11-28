@@ -1,6 +1,6 @@
 package com.example.spedfiscallibexamplefx;
 
-import SPEDFiscalLib.*;
+import sped.lib.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
