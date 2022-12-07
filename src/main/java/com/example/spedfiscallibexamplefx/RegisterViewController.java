@@ -1,6 +1,6 @@
 package com.example.spedfiscallibexamplefx;
 
-import sped.lib.*;
+import sped.core.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -86,6 +86,8 @@ class FieldControls {
 
         textField.setListener((oldValue, newValue) -> {
             listView.getItems().clear();
+
+
 
             field.setValueFromString(newValue);
             textFieldFormatted.clear();

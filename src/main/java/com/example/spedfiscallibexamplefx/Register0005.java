@@ -1,7 +1,7 @@
 package com.example.spedfiscallibexamplefx;
 
-import sped.lib.Factory;
-import sped.lib.NamedRegister;
+import sped.core.Factory;
+import sped.core.NamedRegister;
 
 public class Register0005 extends NamedRegister {
     public static String REGISTER_NAME = "0005";

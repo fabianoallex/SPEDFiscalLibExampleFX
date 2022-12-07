@@ -7,12 +7,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sped.lib.*;
+import sped.core.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
 
 public class ExampleController {
     @FXML
@@ -68,12 +67,15 @@ public class ExampleController {
     @FXML
     protected void onGenerateButtonClick() {
         try {
-            Definitions definitions = new Definitions(
-                    Objects.requireNonNull(
-                            ExampleApplication.class.getResource("definitions.xml")
-                    ).toURI().toString(),
-                    new MyValidation()
-            );
+            String xmlFile = "definitions.xml";
+            Definitions definitions = new Definitions(xmlFile, new MyValidation());
+
+            definitions.setFileLoader(fileName -> {
+                return ExampleApplication.class.getResourceAsStream(fileName);
+                //return Objects.requireNonNull(ExampleApplication.class.getResource(fileName)).openStream();
+            });
+
+
 
             Factory factory = new Factory(definitions);
 
