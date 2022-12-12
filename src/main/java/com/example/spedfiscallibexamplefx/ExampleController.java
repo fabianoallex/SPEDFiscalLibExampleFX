@@ -12,6 +12,7 @@ import sped.core.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
 public class ExampleController {
     @FXML
@@ -67,19 +68,11 @@ public class ExampleController {
     @FXML
     protected void onGenerateButtonClick() {
         try {
-            String xmlFile = "definitions.xml";
-            Definitions definitions = new Definitions(xmlFile, new MyValidation());
-
-            definitions.setFileLoader(fileName -> {
-                return ExampleApplication.class.getResourceAsStream(fileName);
-                //return Objects.requireNonNull(ExampleApplication.class.getResource(fileName)).openStream();
-            });
-
-
-
-            Factory factory = new Factory(definitions);
-
-            SpedGenerator spedGenerator = factory.createSPEDGenerator();
+            SpedGenerator spedGenerator =
+                    (SpedGenerator) new SpedGenerator.Builder("definitions.xml")
+                    .setValidationHelper(new MyValidation())
+                    .setFileLoader(fileName -> Objects.requireNonNull(ExampleApplication.class.getResourceAsStream(fileName)))
+                    .build();
 
             Register r = spedGenerator.getRegister0000().getRegister();  //0000
 
@@ -97,23 +90,8 @@ public class ExampleController {
             r.setFieldValue("IND_ATIV", 0);
 
             Block b0 = spedGenerator.addBlock("0","0001", "0990");
-
-
-
             r = b0.addRegister("0002");
             r.setFieldValue("CLAS_ESTAB_IND", "05");
-
-
-            /*
-            r = b0.addRegister("0005");
-            r.setFieldValue("FANTASIA", "   TESTE FANTASIA");
-            r.setFieldValue("CEP", "teste cep");
-            r.setFieldValue("END", "  teste END");
-            r.setFieldValue("NUM", "  teste NUM");
-            r.setFieldValue("COMPL", "teste COMPL");
-            r.setFieldValue("BAIRRO", "  teste BAIRRO");
-
-             */
 
             //usando classe especializada de NamedRegister
             Register0005 register0005 = (Register0005) b0.addNamedRegister(Register0005.class);
