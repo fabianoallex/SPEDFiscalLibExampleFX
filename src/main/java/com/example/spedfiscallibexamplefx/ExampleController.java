@@ -69,9 +69,9 @@ public class ExampleController {
     protected void onGenerateButtonClick() {
         try {
             SpedGenerator spedGenerator =
-                    (SpedGenerator) new SpedGenerator.Builder("definitions.xml")
-                    .setValidationHelper(new MyValidation())
+                    SpedGenerator.newBuilder("definitions.xml")
                     .setFileLoader(fileName -> Objects.requireNonNull(ExampleApplication.class.getResourceAsStream(fileName)))
+                    .setValidationHelper(new MyValidation())
                     .build();
 
             Register r = spedGenerator.getRegister0000().getRegister();  //0000
@@ -89,7 +89,12 @@ public class ExampleController {
             r.setFieldValue("IE", "ISENTO");
             r.setFieldValue("IND_ATIV", 0);
 
-            Block b0 = spedGenerator.addBlock("0","0001", "0990");
+            Block b0 = spedGenerator.newBlockBuilder()
+                    .setBlockName("0")
+                    .setOpeningRegisterName("0001")
+                    .setClosureRegisterName("0990")
+                    .build();
+
             r = b0.addRegister("0002");
             r.setFieldValue("CLAS_ESTAB_IND", "05");
 
@@ -125,7 +130,12 @@ public class ExampleController {
             r.setFieldValue("DESCR_ANT_ITEM", "ABACATE ANTIGO");
 
 
-            Block bc = spedGenerator.addBlock("C", "C001", "C990");
+            Block bc = spedGenerator.newBlockBuilder()
+                    .setBlockName("C")
+                    .setOpeningRegisterName("C001")
+                    .setClosureRegisterName("C990")
+                    .build();
+
             r = bc.addRegister("C100");
 
             for (int i = 0; i < 4; i++) {
@@ -135,8 +145,17 @@ public class ExampleController {
                 c591.setFieldValue("VL_FCP_ST", 2333.09 + 2*i);
             }
 
-            Block bd = spedGenerator.addBlock("D", "D001", "D990");
-            Block be = spedGenerator.addBlock("E", "E001", "E990");
+            Block bd = spedGenerator.newBlockBuilder()
+                    .setBlockName("D")
+                    .setOpeningRegisterName("D001")
+                    .setClosureRegisterName("D990")
+                    .build();
+
+            Block be = spedGenerator.newBlockBuilder()
+                    .setBlockName("E")
+                    .setOpeningRegisterName("E001")
+                    .setClosureRegisterName("E990")
+                    .build();
 
             //totalizacao: gerar os registros de contagem (bloco 9)
             spedGenerator.generateBlock9();

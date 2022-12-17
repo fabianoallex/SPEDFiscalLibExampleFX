@@ -1,6 +1,6 @@
 package com.example.spedfiscallibexamplefx;
 
-import sped.core.Factory;
+import sped.core.Context;
 import sped.core.NamedRegister;
 
 public class Register0005 extends NamedRegister {
@@ -11,8 +11,8 @@ public class Register0005 extends NamedRegister {
     public static String FIELD_COMPLEMENTO = "COMPL";
     public static String FIELD_BAIRRO = "BAIRRO";
 
-    public Register0005(Factory factory) {
-        super(factory, REGISTER_NAME);
+    public Register0005(Context context) {
+        super(context, REGISTER_NAME);
     }
 
     public void setFantasia(String fantasia) {
